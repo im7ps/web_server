@@ -6,7 +6,7 @@
 /*   By: sgerace <sgerace@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:04:51 by sgerace           #+#    #+#             */
-/*   Updated: 2023/10/02 16:59:09 by sgerace          ###   ########.fr       */
+/*   Updated: 2023/10/02 17:17:30 by sgerace          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,9 @@ void ft_trim(std::string& str)
     }
 }
 
-int ps_create_list_2(std::ifstream& confFile)
+void ps_create_map_vector2(std::ifstream& confFile, std::vector<std::pair<std::string, std::string> > &vector)
 {
     std::string line;
-    std::vector<std::pair<std::string, std::string> > elements;
 
     while (std::getline(confFile, line))
     {
@@ -44,30 +43,19 @@ int ps_create_list_2(std::ifstream& confFile)
             continue;
         }
 
-        std::cout << line << std::endl;
-
-        std::cout << "---------------" << std::endl;
-
         size_t pos = line.find(' ');
         if (pos != std::string::npos) 
         {
             std::string key = line.substr(0, pos);
             std::string value = line.substr(pos + 1);
 
-            elements.push_back(std::make_pair(key, value));
+            vector.push_back(std::make_pair(key, value));
         }
     }
-
-    for (std::vector<std::pair<std::string, std::string> >::iterator it = elements.begin(); it != elements.end(); ++it) 
-    {
-        std::cout << "Chiave: " << it->first << ", Valore: " << it->second << std::endl;
-    }
-
-
-    return 0;
+    return ;
 }
 
-bool ps_create_list(const char* path)
+bool ps_create_map_vector(const char* path, std::vector<std::pair<std::string, std::string> > &vector)
 {
     std::ifstream confFile(path);
 
@@ -83,17 +71,19 @@ bool ps_create_list(const char* path)
         std::cerr << "Errore: " << e.what();
     }
 
-    if (ps_create_list_2(confFile))
-        return false;
+    ps_create_map_vector2(confFile, vector);
+    if (vector.empty())
+    {
+        std::cout << "File vuoto!\n";
+    }
 
     confFile.close();
-
-    //dovrá ritornare la lista
     return true;
 }
 
 int main (int argc, char** argv)
 {
+    std::vector<std::pair<std::string, std::string> > vector;
     if (argc > 2)
     {
         std::cout << "USAGE: ./webserver [CONFIGURATION_FILE].\n";
@@ -102,14 +92,19 @@ int main (int argc, char** argv)
 
     if (argc == 1)
     {
-        if (!ps_create_list("./configuration_files/default.txt"))
+        if (!ps_create_map_vector("./configuration_files/default.txt", vector))
             return 1;
     }
 
     else
     {
-        if (!ps_create_list(argv[1]))
+        if (!ps_create_map_vector(argv[1], vector))
             return 1;
+    }
+
+    for (std::vector<std::pair<std::string, std::string> >::iterator it = vector.begin(); it != vector.end(); ++it)
+    {
+        std::cout << "Chiave: " << it->first << ", Valore: " << it->second << std::endl;
     }
     return 0;
 }
