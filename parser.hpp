@@ -3,6 +3,11 @@
 
 # include <fstream>
 # include <iostream>
+# include <map>
+# include <vector>
+# include <string>
+# include <sstream>
+# include <algorithm>
 
 # define SERVER 1
 # define HOST 2

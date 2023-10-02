@@ -3,6 +3,12 @@ server {
     port 80;
     server_name example.com;
 
+
+
+
+            
+
+                    
     location / {
         methods GET;
         directory /var/www/site1;
