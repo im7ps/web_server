@@ -1,0 +1,62 @@
+server {
+    host 0.0.0.0;
+    port 80;
+    server_name example.com;
+
+    error_page 404 /errors/404.html;
+    error_page 500 /errors/500.html;
+
+    max_client_body_size 10M;
+
+    location / {
+        methods GET POST;
+        directory_listing on;
+        default_file index.html;
+        execute_cgi .php;
+    }
+
+    location /blog {
+        methods GET;
+        redirect /new-blog;
+    }
+
+    location /new-blog {
+        methods GET;
+        directory /var/www/blog;
+        default_file index.html;
+    }
+
+    location /upload {
+        methods POST;
+        upload_directory /var/www/uploads;
+    }
+}
+
+server {
+    host 0.0.0.0;
+    port 8080;
+
+    error_page 404 /errors/404.html;
+
+    location / {
+        methods GET;
+        directory /var/www/second-site;
+        default_file index.html;
+    }
+
+    location /api {
+        methods GET POST;
+        execute_cgi .php;
+    }
+}
+
+server {
+    host 0.0.0.0;
+    port 80;
+
+    location / {
+        methods GET;
+        directory /var/www/default;
+        default_file index.html;
+    }
+}

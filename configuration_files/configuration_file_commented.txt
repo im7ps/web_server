@@ -1,0 +1,71 @@
+# Impostazione del server principale
+server {
+    host 0.0.0.0;
+    port 80;
+    server_name example.com; # Configurazione del nome del server principale
+
+    # Pagina di errore predefinita
+    error_page 404 /errors/404.html; # Configura la pagina di errore 404
+    error_page 500 /errors/500.html; # Configura la pagina di errore 500
+
+    # Limita la dimensione del corpo del client a 10 MB
+    max_client_body_size 10M; # Imposta il limite della dimensione del corpo del client
+
+    # Configura le route
+    location / {
+        methods GET POST; # Accetta i metodi HTTP GET e POST
+        directory_listing on; # Abilita la visualizzazione dell'elenco delle directory
+        default_file index.html; # Imposta il file predefinito per le directory
+        execute_cgi .php; # Esegui CGI per file con estensione .php
+    }
+
+    location /blog {
+        methods GET; # Accetta solo il metodo HTTP GET
+        redirect /new-blog; # Esegue una redirezione per /blog a /new-blog
+    }
+
+    location /new-blog {
+        methods GET; # Accetta solo il metodo HTTP GET
+        directory /var/www/blog; # Imposta la directory radice per /new-blog
+        default_file index.html; # Imposta il file predefinito per /new-blog
+    }
+
+    location /upload {
+        methods POST; # Accetta solo il metodo HTTP POST
+        upload_directory /var/www/uploads; # Imposta la directory per il caricamento dei file
+    }
+}
+
+# Server aggiuntivo
+server {
+    host 0.0.0.0;
+    port 8080;
+
+    # Pagina di errore predefinita
+    error_page 404 /errors/404.html; # Configura la pagina di errore 404
+
+    # Configura le route
+    location / {
+        methods GET; # Accetta solo il metodo HTTP GET
+        directory /var/www/second-site; # Imposta la directory radice per questo server
+        default_file index.html; # Imposta il file predefinito per questa directory
+    }
+
+    location /api {
+        methods GET POST; # Accetta i metodi HTTP GET e POST
+        execute_cgi .php; # Esegui CGI per file con estensione .php
+    }
+}
+
+# Server predefinito per qualsiasi altra richiesta
+server {
+    host 0.0.0.0;
+    port 80;
+
+    # Configura le route
+    location / {
+        methods GET; # Accetta solo il metodo HTTP GET
+        directory /var/www/default; # Imposta la directory radice per questo server
+        default_file index.html; # Imposta il file predefinito per questa directory
+    }
+}
