@@ -1,14 +1,7 @@
 server {
     host 0.0.0.0;
     port 80;
-    server_name example.com;
-
-
-
-
-            
-
-                    
+    server_name example.com;            
     location / {
         methods GET;
         directory /var/www/site1;
@@ -16,13 +9,3 @@ server {
     }
 }
 
-server {
-    host 0.0.0.0;
-    port 80;
-
-    location / {
-        methods GET;
-        directory /var/www/site2;
-        default_file index.html;
-    }
-}

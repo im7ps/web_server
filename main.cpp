@@ -6,7 +6,7 @@
 /*   By: sgerace <sgerace@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:04:51 by sgerace           #+#    #+#             */
-/*   Updated: 2023/10/02 23:09:19 by sgerace          ###   ########.fr       */
+/*   Updated: 2023/10/03 18:17:25 by sgerace          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,39 @@ void ft_trim(std::string& str)
     }
 }
 
-// viene pulita la linea che si legge ad ogni ciclo, linee vuote e commenti vengono saltati, si crea il vettore con i campi key-value
+int ps_check_curlyb(std::string line)
+{
+    static int counter;
+
+    if (!line.empty())
+    {
+        if (!line.find('{'))
+        {
+            std::cout << line << std::endl;
+            counter++;
+        }
+        else if (line[0] == '}')
+        {
+            std::cout << line << "asd" << std::endl;
+            counter--;
+        }
+    }
+    return counter;
+}
+
+// vengono controllate le parentesi graffe, viene pulita la linea che si legge ad ogni ciclo, linee vuote e commenti vengono saltati, si crea il vettore con i campi key-value
 void ps_create_vector2(std::ifstream& confFile, std::vector<std::pair<std::string, std::string> > &vector)
 {
-    std::string line;
+    std::string   line;
+    int           counter;
+
     while (std::getline(confFile, line))
     {
-        ft_trim(line);        
+        ft_trim(line);
+        ps_check_curlyb(line);
 
-        if (line.empty() || line[0] == '#') {
+        if (line.empty() || line[0] == '#') 
+        {
             continue;
         }
 
@@ -54,6 +78,10 @@ void ps_create_vector2(std::ifstream& confFile, std::vector<std::pair<std::strin
             vector.push_back(std::make_pair(key, value));
         }
     }
+    counter = ps_check_curlyb("");
+    std::cout << counter << std::endl;
+    if (counter != 0)
+        throw SyntaxError();
     return ;
 }
 
@@ -73,7 +101,15 @@ bool ps_create_vector(const std::string path, std::vector<std::pair<std::string,
         std::cerr << "Errore: " << e.what();
         return false;
     }
-    ps_create_vector2(confFile, vector);
+    try
+    {
+        ps_create_vector2(confFile, vector);
+    }
+    catch (const SyntaxError& e)
+    {
+        std::cerr << e.what();
+        return false;
+    }
     if (vector.empty())
     {
         std::cout << "Configuration file non formattato correttamente\n";
@@ -84,6 +120,7 @@ bool ps_create_vector(const std::string path, std::vector<std::pair<std::string,
 
 void ps_check_server(std::string value)
 {
+    // std::cout << "|" << value << "|" << std::endl;
     if (value != "{")
         throw SyntaxError();
 }
@@ -162,10 +199,11 @@ void ps_router(std::vector<std::pair<std::string, std::string> >::iterator it, R
 int ps_check_vector(std::vector<std::pair<std::string, std::string> >& vector)
 {
     RequiredItems requiredItems;
+
     for (std::vector<std::pair<std::string, std::string> >::iterator it = vector.begin(); it != vector.end(); ++it)
     {
         ps_router(it, requiredItems);
-        // std::cout << "Chiave: " << it->first << ", Valore: " << it->second << std::endl;
+        std::cout << "Chiave: " << it->first << ", Valore: " << it->second << std::endl;
     }
     
     return 0;
