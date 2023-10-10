@@ -1,16 +1,10 @@
-{ server {
+server {
     host 0.0.0.0;
     port 80;
-    megacacca
-    ----
     server_name example.com;            
-    { location / {
+    location / { 
         methods GET;
         directory /var/www/site1;
         default_file index.html;
     }
 }
-}
-}
-
-cacca

@@ -1,13 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.hpp                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: stepis <stepis@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/10 18:30:26 by stepis            #+#    #+#             */
+/*   Updated: 2023/10/10 20:18:10 by stepis           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PARSER_HPP
 # define PARSER_HPP
 
-# include <fstream>
-# include <iostream>
-# include <map>
-# include <vector>
-# include <string>
-# include <sstream>
-# include <algorithm>
+#include "libraries.hpp"
 
 # define SERVER 1
 # define HOST 2
@@ -72,7 +78,12 @@ struct RequiredItems {
         }
 };
 
+bool	ps_create_map(const std::string path, std::map<std::string, std::string>& configMap);
+void	ps_create_map2(std::ifstream& confFile, std::map<std::string, std::string>& configMap);
+int		ps_check_map(std::map<std::string, std::string>& configMap);
+void	ps_check_server(std::string value);
+void	ps_check_location(std::string value);
+void	ft_trim(std::string& str);
 
-bool ps_cfile(const char* path);
 
 #endif

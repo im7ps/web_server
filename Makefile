@@ -3,18 +3,28 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sgerace <sgerace@student.42.fr>            +#+  +:+       +#+         #
+#    By: stepis <stepis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/01 19:04:12 by sgerace           #+#    #+#              #
-#    Updated: 2023/10/01 19:21:36 by sgerace          ###   ########.fr        #
+#    Updated: 2023/10/10 20:15:48 by stepis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CXXFLAGS = -std=c++98 #-Wall -Wextra -Werror 
-
 TARGET = web_server
 
-SRCS = 	main.cpp \
+USER = sgerace
+
+CXXFLAGS = -std=c++98 #-Wall -Wextra -Werror 
+
+SRCS = 	./main/main.cpp \
+		./main/main_utils.cpp \
+		./parser/ps_checker.cpp \
+		./parser/ps_curlyb.cpp \
+		./parser/ps_location.cpp \
+		./parser/ps_map.cpp \
+		./parser/ps_router.cpp \
+		./parser/ps_server.cpp \
+		./utils/ft_trim.cpp \
 
 OBJS = $(SRCS:.cpp=.o)
 
