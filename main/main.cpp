@@ -6,7 +6,7 @@
 /*   By: stepis <stepis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:04:51 by sgerace           #+#    #+#             */
-/*   Updated: 2023/10/10 20:12:01 by stepis           ###   ########.fr       */
+/*   Updated: 2023/10/12 17:21:16 by stepis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void argc_checker(int argc, char** argv, std::string& path);
 
 int main (int argc, char** argv)
 {
-	std::map<std::string, std::string> configMap;
+	//std::map<std::string, std::string> configMap;
+	std::vector<std::pair<std::string, std::string> > configMap;
 	std::string path;
 
 	try

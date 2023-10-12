@@ -6,7 +6,7 @@
 /*   By: stepis <stepis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 18:30:26 by stepis            #+#    #+#             */
-/*   Updated: 2023/10/10 20:18:10 by stepis           ###   ########.fr       */
+/*   Updated: 2023/10/12 17:24:32 by stepis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,12 @@ struct RequiredItems {
         }
 };
 
-bool	ps_create_map(const std::string path, std::map<std::string, std::string>& configMap);
-void	ps_create_map2(std::ifstream& confFile, std::map<std::string, std::string>& configMap);
-int		ps_check_map(std::map<std::string, std::string>& configMap);
+bool	ps_create_map(const std::string path, std::vector<std::pair<std::string, std::string> > &configMap);
+void	ps_create_map2(std::ifstream& confFile, std::vector<std::pair<std::string, std::string> > &congifMap);
+int		ps_check_map(std::vector<std::pair<std::string, std::string> > &configMap);
 void	ps_check_server(std::string value);
 void	ps_check_location(std::string value);
+int		ps_check_curlyb(std::string line);
 void	ft_trim(std::string& str);
 
 
