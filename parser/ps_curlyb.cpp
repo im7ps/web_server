@@ -6,7 +6,7 @@
 /*   By: stepis <stepis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 18:31:44 by stepis            #+#    #+#             */
-/*   Updated: 2023/10/10 19:07:00 by stepis           ###   ########.fr       */
+/*   Updated: 2023/10/13 16:44:44 by stepis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,9 @@ int ps_check_curlyb(std::string line)
 
 	if (!line.empty())
 	{
-		if (line.find('{') != std::string::npos)
+		if (line.find('{') != line.length() - 1)
 		{
-			//std::cout << line << std::endl;
-			for (int i = 0; i < line.length(); ++i) {
-				if (line[i] == '{') {
-					counter++;
-				}
-			}
-			//counter++;
+			counter++;
 		}
 		else if (line[0] == '}') //se e l unico carattere presente
 		{

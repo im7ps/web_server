@@ -6,7 +6,7 @@
 /*   By: stepis <stepis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 19:13:29 by stepis            #+#    #+#             */
-/*   Updated: 2023/10/12 17:55:43 by stepis           ###   ########.fr       */
+/*   Updated: 2023/10/13 16:45:49 by stepis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ void ps_create_map2(std::ifstream& confFile, std::vector<std::pair<std::string, 
 			vector.push_back(std::make_pair(key, value));
 		}
 	}
+	counter = ps_check_curlyb("");
+	if (counter != 0)
+		throw SyntaxError();
 	return ;
 }
 
