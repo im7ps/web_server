@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps_map.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stepis <stepis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sgerace <sgerace@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 19:13:29 by stepis            #+#    #+#             */
-/*   Updated: 2023/10/13 16:45:49 by stepis           ###   ########.fr       */
+/*   Updated: 2023/10/13 16:52:01 by sgerace          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void ps_create_map2(std::ifstream& confFile, std::vector<std::pair<std::string, 
 	while (std::getline(confFile, line))
 	{
 		ft_trim(line);
+		ps_check_curlyb(line);
 
 		if (line.empty() || line[0] == '#') 
 		{
@@ -37,6 +38,7 @@ void ps_create_map2(std::ifstream& confFile, std::vector<std::pair<std::string, 
 		}
 	}
 	counter = ps_check_curlyb("");
+	std::cout << counter << std::endl;
 	if (counter != 0)
 		throw SyntaxError();
 	return ;
@@ -65,7 +67,6 @@ bool ps_create_map(const std::string path, std::vector<std::pair<std::string, st
 	}
 	catch (const SyntaxError& e)
 	{
-		//non ci entrerà mai per ora perchè ho disattivato il controllo ortografico
 		std::cerr << e.what();
 		return true;
 	}

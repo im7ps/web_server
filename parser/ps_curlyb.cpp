@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps_curlyb.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stepis <stepis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sgerace <sgerace@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 18:31:44 by stepis            #+#    #+#             */
-/*   Updated: 2023/10/13 16:44:44 by stepis           ###   ########.fr       */
+/*   Updated: 2023/10/13 17:00:04 by sgerace          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,25 @@
 
 int ps_check_curlyb(std::string line)
 {
-	static int counter;
-
+	static int	counter;
+	int			index;
 
 	if (!line.empty())
 	{
-		if (line.find('{') != line.length() - 1)
+		index = line.find('{');
+		if (index != std::string::npos)
 		{
-			counter++;
+			if (index == line.length() - 1)
+			{
+				counter++;
+			}
+			else
+			{
+				throw SyntaxError();
+			}
 		}
-		else if (line[0] == '}') //se e l unico carattere presente
+		else if (line[0] == '}') //se e l unico carattere presente nella riga
 		{
-			//std::cout << line << "asd" << std::endl;
 			counter--;
 		}
 	}
