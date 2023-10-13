@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: stepis <stepis@student.42.fr>              +#+  +:+       +#+         #
+#    By: sgerace <sgerace@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/01 19:04:12 by sgerace           #+#    #+#              #
-#    Updated: 2023/10/10 20:15:48 by stepis           ###   ########.fr        #
+#    Updated: 2023/10/13 17:24:18 by sgerace          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRCS = 	./main/main.cpp \
 		./parser/ps_map.cpp \
 		./parser/ps_router.cpp \
 		./parser/ps_server.cpp \
+		./parser/parser.cpp \
 		./utils/ft_trim.cpp \
 
 OBJS = $(SRCS:.cpp=.o)

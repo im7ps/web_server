@@ -6,7 +6,7 @@
 /*   By: sgerace <sgerace@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 19:13:29 by stepis            #+#    #+#             */
-/*   Updated: 2023/10/13 16:52:01 by sgerace          ###   ########.fr       */
+/*   Updated: 2023/10/13 17:01:33 by sgerace          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void ps_create_map2(std::ifstream& confFile, std::vector<std::pair<std::string, 
 		}
 	}
 	counter = ps_check_curlyb("");
-	std::cout << counter << std::endl;
 	if (counter != 0)
 		throw SyntaxError();
 	return ;
