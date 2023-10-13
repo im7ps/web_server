@@ -6,7 +6,7 @@
 /*   By: stepis <stepis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 19:13:29 by stepis            #+#    #+#             */
-/*   Updated: 2023/10/12 17:23:19 by stepis           ###   ########.fr       */
+/*   Updated: 2023/10/12 17:55:43 by stepis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void ps_create_map2(std::ifstream& confFile, std::vector<std::pair<std::string, 
 	while (std::getline(confFile, line))
 	{
 		ft_trim(line);
-		ps_check_curlyb(line);
 
 		if (line.empty() || line[0] == '#') 
 		{
@@ -37,10 +36,6 @@ void ps_create_map2(std::ifstream& confFile, std::vector<std::pair<std::string, 
 			vector.push_back(std::make_pair(key, value));
 		}
 	}
-	counter = ps_check_curlyb("");
-	//std::cout << counter << std::endl;
-	if (counter != 0)
-		throw SyntaxError();
 	return ;
 }
 
@@ -60,15 +55,18 @@ bool ps_create_map(const std::string path, std::vector<std::pair<std::string, st
 		std::cerr << "Errore: " << e.what();
 		return true;
 	}
+
 	try
 	{
 		ps_create_map2(confFile, configMap);
 	}
 	catch (const SyntaxError& e)
 	{
+		//non ci entrerà mai per ora perchè ho disattivato il controllo ortografico
 		std::cerr << e.what();
 		return true;
 	}
+
 	if (configMap.empty())
 	{
 		std::cout << "Configuration file non formattato correttamente\n";
