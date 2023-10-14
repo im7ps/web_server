@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgerace <sgerace@student.42.fr>            +#+  +:+       +#+        */
+/*   By: stepis <stepis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 17:15:40 by sgerace           #+#    #+#             */
-/*   Updated: 2023/10/13 17:18:27 by sgerace          ###   ########.fr       */
+/*   Updated: 2023/10/13 21:05:45 by stepis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,16 @@ Required::~Required()
 const std::string* Required::getAttributes() 
 {
 	return attributes;
+}
+
+int Required::findAttribute(const std::string& target) const
+{
+    for (int i = 0; i < 13; ++i)
+	{
+        if (attributes[i] == target)
+		{
+            return i;  // Restituisci l'indice se la stringa è stata trovata.
+        }
+    }
+    return -1; // Se la stringa non è stata trovata, restituisci -1.
 }
