@@ -6,7 +6,7 @@
 #    By: stepis <stepis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/01 19:04:12 by sgerace           #+#    #+#              #
-#    Updated: 2023/10/14 16:20:13 by stepis           ###   ########.fr        #
+#    Updated: 2023/10/14 20:42:30 by stepis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,11 +22,11 @@ SRCS = 	./main/main.cpp \
 		./parser/ps_curlyb.cpp \
 		./parser/ps_location.cpp \
 		./parser/ps_map.cpp \
-		./parser/ps_router.cpp \
-		./parser/ps_server.cpp \
 		./parser/parser.cpp \
 		./utils/ft_trim.cpp \
 		./utils/ft_itos.cpp \
+		./utils/print_array_server.cpp \
+		./utils/delete_array_server.cpp \
 
 OBJS = $(SRCS:.cpp=.o)
 
@@ -35,10 +35,10 @@ OBJS = $(SRCS:.cpp=.o)
 all: $(TARGET)
 
 $(TARGET): $(OBJS)
-	c++ $(CXXFLAGS) $^ -o $@
+	g++ $(CXXFLAGS) $^ -o $@
 
 %.o: %.cpp
-	c++ $(CXXFLAGS) -c $< -o $@
+	g++ $(CXXFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJS)

@@ -6,7 +6,7 @@
 /*   By: stepis <stepis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 18:30:26 by stepis            #+#    #+#             */
-/*   Updated: 2023/10/14 19:29:59 by stepis           ###   ########.fr       */
+/*   Updated: 2023/10/14 20:43:52 by stepis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,14 @@ struct Server {
 	std::string port;
 	std::string error_page;
 	std::string max_client_body_size;
-	Location* locations;
+	Location*	locations;
 };
 
 struct ServerNode {
     int location_count;
 };
 
-void	ps_create_vector(const std::string path, std::list<ServerNode>& serverList);
+void		ps_create_vector(const std::string path, std::list<ServerNode>& serverList, Server*& serverArray);
 int			ps_check_map(std::vector<std::pair<std::string, std::string> >& configMap);
 int			ps_router(std::vector<std::pair<std::string, std::string> >::iterator it, Required& Required);
 void		ps_check_server(std::string value);
@@ -90,6 +90,7 @@ void		ps_check_location(std::string value);
 int			ps_check_curlyb(std::string line);
 std::string ft_itos(int number);
 void		ft_trim(std::string& str);
-
+void		print_server_array(const Server* serverArray, size_t arraySize);
+void		delete_server_array(Server* serverArray, size_t arraySize);
 
 #endif

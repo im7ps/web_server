@@ -6,7 +6,7 @@
 /*   By: stepis <stepis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 19:13:29 by stepis            #+#    #+#             */
-/*   Updated: 2023/10/14 19:38:31 by stepis           ###   ########.fr       */
+/*   Updated: 2023/10/14 20:43:03 by stepis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,22 +90,11 @@ void	ps_init_vector(Server* serverArray, std::list<ServerNode>& serverList)
 	ps_init_locations(serverArray, serverList);
 }
 
-void printServerArray(const Server* serverArray, size_t arraySize) {
-    for (size_t i = 0; i < arraySize; ++i) {
-        std::cout << "Server: " << serverArray[i].indice << std::endl;
-
-        // Stampa le informazioni delle Location all'interno di ciascun Server
-        for (int j = 0; j < serverArray[i].location_num; ++j) {
-            std::cout << "Location: " << serverArray[i].locations[j].indice << std::endl; 
-        }
-    }
-}
-
-// se si riesce si apre il file, si manda in pasto alla funzione vector2 e poi si chiude il file
-void	ps_create_vector(const std::string path, std::list<ServerNode>& serverList)
+// legge dal file il numero di server e di location e crea il vettore server da riempire con i valori
+void	ps_create_vector(const std::string path, std::list<ServerNode>& serverList, Server*& serverArray)
 {
-	Server serverArray;
-
+	size_t arraySize;
+	
 	std::ifstream confFile(path.c_str());
 	try
 	{
@@ -117,23 +106,19 @@ void	ps_create_vector(const std::string path, std::list<ServerNode>& serverList)
 		// legge il file riga per riga, conta il numero di volte che è presente la stringa server e il numero di volte che è presente la stringa location all interno di ogni server
 		ps_count_elem(confFile, serverList);
 	
-        // Alloca dinamicamente l'array di Server
-        size_t arraySize = serverList.size();
-        Server* serverArray = new Server[arraySize];
-
-
-
-		
+        // alloca dinamicamente l'array di Server
+        arraySize = serverList.size();
+        serverArray = new Server[arraySize];
 		if (!serverArray)
 		{
 			throw std::runtime_error("Memoria insufficiente\n");
 		}
-        // Invia l'array allocato dinamicamente a ps_fill_vector
+
+		// inizializza il vettore Server ed alloca ed inizializza i vettori Location associati
         ps_init_vector(serverArray, serverList);
 
-		printServerArray(serverArray, arraySize);
-
-
+		// stampa il vettore
+		print_server_array(serverArray, arraySize);
 		confFile.close();
 	}
 	catch(const std::exception& e)
