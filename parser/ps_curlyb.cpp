@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ps_curlyb.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sgerace <sgerace@student.42.fr>            +#+  +:+       +#+        */
+/*   By: stepis <stepis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 18:31:44 by stepis            #+#    #+#             */
-/*   Updated: 2023/10/13 17:00:04 by sgerace          ###   ########.fr       */
+/*   Updated: 2023/10/16 16:00:12 by stepis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int ps_check_curlyb(std::string line)
 {
-	static int	counter;
+	static int	counter = 0;
 	int			index;
 
 	if (!line.empty())

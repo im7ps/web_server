@@ -6,7 +6,7 @@
 #    By: stepis <stepis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/01 19:04:12 by sgerace           #+#    #+#              #
-#    Updated: 2023/10/14 20:42:30 by stepis           ###   ########.fr        #
+#    Updated: 2023/10/16 15:54:24 by stepis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,19 +14,13 @@ TARGET = web_server
 
 USER = sgerace
 
-CXXFLAGS = -std=c++98 #-Wall -Wextra -Werror 
+CXXFLAGS = -g -std=c++98 #-Wall -Wextra -Werror 
 
 SRCS = 	./main/main.cpp \
 		./main/main_utils.cpp \
-		./parser/ps_checker.cpp \
 		./parser/ps_curlyb.cpp \
-		./parser/ps_location.cpp \
-		./parser/ps_map.cpp \
-		./parser/parser.cpp \
 		./utils/ft_trim.cpp \
 		./utils/ft_itos.cpp \
-		./utils/print_array_server.cpp \
-		./utils/delete_array_server.cpp \
 
 OBJS = $(SRCS:.cpp=.o)
 
@@ -35,10 +29,10 @@ OBJS = $(SRCS:.cpp=.o)
 all: $(TARGET)
 
 $(TARGET): $(OBJS)
-	g++ $(CXXFLAGS) $^ -o $@
+	c++ $(CXXFLAGS) $^ -o $@
 
 %.o: %.cpp
-	g++ $(CXXFLAGS) -c $< -o $@
+	c++ $(CXXFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJS)

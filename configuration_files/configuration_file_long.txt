@@ -34,6 +34,8 @@ server              		{
 
 server {
     host 0.0.0.0;
+	server_name example2.com;
+
     port 8080;
 
     error_page 404 /errors/404.html;
@@ -58,5 +60,6 @@ server {
         methods GET;
         directory /var/www/default;
         default_file index.html;
+		redirect /newer-blog;
     }
 }
