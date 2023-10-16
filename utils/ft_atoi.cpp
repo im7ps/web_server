@@ -1,34 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   ft_atoi.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stepis <stepis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/01 19:04:51 by sgerace           #+#    #+#             */
-/*   Updated: 2023/10/16 22:45:46 by stepis           ###   ########.fr       */
+/*   Created: 2023/10/16 22:34:21 by stepis            #+#    #+#             */
+/*   Updated: 2023/10/16 22:54:59 by stepis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libraries.hpp"
 
-void argc_checker(int argc, char** argv, std::string& path);
-
-int main (int argc, char** argv)
+bool isNumeric(const std::string& str)
 {
-	std::string				path;
-	ConfigData				configMap;
+    for (size_t i = 0; i < str.length(); ++i) {
+        if (!std::isdigit(str[i]) && str[i] != ';') {
+            return false;
+        }
+    }
+    return true;
+}
 
-	try
-	{
-		argc_checker(argc, argv, path);
-		ps_fill_vector(path, configMap);
-		ps_check_list(configMap);
-		//printConfigData(configMap);
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what();
-	}
-	return 0;
+int	ft_atoi(const std::string& str)
+{
+	int	result;
+
+	if (!isNumeric(str))
+		throw std::runtime_error("Port value is not numeric\n");
+	std::stringstream ss(str);
+	ss >> result;
+	return result;
 }

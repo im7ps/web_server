@@ -6,7 +6,7 @@
 #    By: stepis <stepis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/01 19:04:12 by sgerace           #+#    #+#              #
-#    Updated: 2023/10/16 15:54:24 by stepis           ###   ########.fr        #
+#    Updated: 2023/10/16 22:33:15 by stepis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,13 @@ CXXFLAGS = -g -std=c++98 #-Wall -Wextra -Werror
 SRCS = 	./main/main.cpp \
 		./main/main_utils.cpp \
 		./parser/ps_curlyb.cpp \
+		./parser/ps_fill_vector.cpp \
+		./parser/ps_init_struct.cpp \
+		./parser/ps_check_list.cpp \
 		./utils/ft_trim.cpp \
 		./utils/ft_itos.cpp \
+		./utils/ft_atoi.cpp \
+		./utils/print_list_data.cpp \
 
 OBJS = $(SRCS:.cpp=.o)
 

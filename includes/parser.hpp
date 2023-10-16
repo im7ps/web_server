@@ -6,7 +6,7 @@
 /*   By: stepis <stepis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 18:30:26 by stepis            #+#    #+#             */
-/*   Updated: 2023/10/16 15:44:40 by stepis           ###   ########.fr       */
+/*   Updated: 2023/10/16 22:53:15 by stepis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,29 +31,6 @@ enum RequiredParams {
     DIRECTORY_LISTENING
 };
 
-struct Location {
-	std::string location;
-	std::string root;
-	std::string index;
-	std::string cgi_extension;
-	std::string autoindex;
-	std::string methods;
-	std::string redirect;
-	std::string directory;
-	std::string default_file;
-	std::string execute_cgi;
-	std::string upload_directory;
-	std::string directory_listening;
-};
-
-struct Server {
-	std::string server_name;
-	std::string host;
-	std::string port;
-	std::string error_page;
-	std::string max_client_body_size;
-};
-
 struct LocationNode {
 	std::string location;
 	std::string root;
@@ -73,7 +50,6 @@ struct LocationNode {
 struct ServerNode {
 	std::string	server_id;
 	std::string server_name;
-	std::string host;
 	std::string port;
 	std::string error_page;
 	std::string max_client_body_size;
@@ -82,19 +58,18 @@ struct ServerNode {
 };
 
 struct ConfigData {
-	Server server;
-	Location location;
+	//da aggiungere i parametri globali
 	std::list<ServerNode> serverList;
 };
 
-
-void		ps_create_vector(const std::string path, std::list<ServerNode>& serverList, Server*& serverArray);
-void		ps_check_server(std::string value);
-void		ps_check_location(std::string value);
 int			ps_check_curlyb(std::string line);
+void		ps_fill_vector(const std::string path, ConfigData& data);
+void		ps_init_server_node(ServerNode& serverNode);
+void		ps_init_location_node(LocationNode& locationNode);
+void		ps_check_list(ConfigData& data);
 std::string ft_itos(int number);
-void		ft_trim(std::string& str);
-void		print_server_array(const Server* serverArray, size_t arraySize);
-void		delete_server_array(Server* serverArray, size_t arraySize);
+int			ft_atoi(const std::string& str);
+std::string	ft_trim(std::string& str);
+void		printConfigData(ConfigData& data);
 
 #endif
