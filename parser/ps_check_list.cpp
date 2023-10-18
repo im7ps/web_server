@@ -6,7 +6,7 @@
 /*   By: stepis <stepis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 21:31:18 by stepis            #+#    #+#             */
-/*   Updated: 2023/10/16 23:03:55 by stepis           ###   ########.fr       */
+/*   Updated: 2023/10/18 10:48:56 by stepis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	ps_check_server(std::string& value)
 	value = ft_itos(++index);
 }
 
-static void ps_check_server_port(std::string& value)
+static void ps_check_port(std::string& value)
 {
 	int	listen = 0;
 
@@ -30,6 +30,23 @@ static void ps_check_server_port(std::string& value)
 	listen = ft_atoi(value);
 	if (listen < 0 || listen > 65535)
 		throw std::runtime_error("Port value is too big or too small\n");
+}
+
+static void ps_is_empty(const std::string value)
+{
+	if (value.empty())
+		throw std::runtime_error("Value is empty\n");
+}
+
+static void ps_check_client_size(const std::string size)
+{
+	int client_size = 0;
+
+	if (size.empty())
+		throw std::runtime_error("Client size value is empty\n");
+	client_size = ft_atoi(size);
+	if (client_size < 1 || client_size > 1048576) //valore espresso in numero di bytes (default value di nginx)
+		throw std::runtime_error("Client size value is not valid\n");
 }
 
 static void	ps_check_location(const std::string value)
@@ -46,9 +63,9 @@ void	ps_check_list(ConfigData& data)
 	for (it = data.serverList.begin(); it != data.serverList.end(); it++)
 	{
 		ps_check_server(it->server_id);
-		ps_check_server_port(it->port);
-		ps_check_server(it->error_page);
-		ps_check_server(it->max_client_body_size);
+		ps_check_port(it->port);
+		ps_check_client_size(it->max_client_body_size);
+		ps_is_empty(it->error_page);
 		for (it2 = it->locationList.begin(); it2 != it->locationList.end(); it2++)
 		{
 			ps_check_location(it2->location);
