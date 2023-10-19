@@ -6,7 +6,7 @@
 #    By: stepis <stepis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/01 19:04:12 by sgerace           #+#    #+#              #
-#    Updated: 2023/10/16 22:33:15 by stepis           ###   ########.fr        #
+#    Updated: 2023/10/19 16:45:18 by stepis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRCS = 	./main/main.cpp \
 		./parser/ps_fill_vector.cpp \
 		./parser/ps_init_struct.cpp \
 		./parser/ps_check_list.cpp \
+		./socket/socket.cpp \
 		./utils/ft_trim.cpp \
 		./utils/ft_itos.cpp \
 		./utils/ft_atoi.cpp \

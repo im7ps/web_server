@@ -6,7 +6,7 @@
 /*   By: stepis <stepis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 18:30:26 by stepis            #+#    #+#             */
-/*   Updated: 2023/10/19 14:53:52 by stepis           ###   ########.fr       */
+/*   Updated: 2023/10/19 16:45:07 by stepis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define PARSER_HPP
 
 #include "libraries.hpp"
+
+#define MAX_EVENTS 10
 
 enum RequiredParams {
     SERVER,
@@ -71,5 +73,7 @@ std::string ft_itos(int number);
 int			ft_atoi(const std::string& str);
 std::string	ft_trim(std::string& str);
 void		printConfigData(ConfigData& data);
+
+void	socket_handler(ConfigData& configMap);
 
 #endif

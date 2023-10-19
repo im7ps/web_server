@@ -2,8 +2,9 @@ chiave universale valore2;
 
 server {
     host 0.0.0.0;
-    listen                  	80;
-    server_name    			 	 	 example.com;  	 	 	 	
+    listen 50001;
+    server_name    			 	 	 example.com;
+	max_client_body_size 1048576; 	 	 	 	
     location / {
         methods GET;
         directory /var/www/site1;

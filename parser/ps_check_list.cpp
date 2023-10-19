@@ -6,7 +6,7 @@
 /*   By: stepis <stepis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 21:31:18 by stepis            #+#    #+#             */
-/*   Updated: 2023/10/19 14:54:17 by stepis           ###   ########.fr       */
+/*   Updated: 2023/10/19 17:15:40 by stepis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void ps_check_listen(std::string& value)
 		throw std::runtime_error("Listen value is not valid\n");
 
 	value[value.length() - 1] = '\0'; //rimuovo il punto e virgola per mandarlo all atoi
+	std::cout << "listen: " << value << std::endl;
 	listen = ft_atoi(value);
 	if (listen < 0 || listen > 65535)
 		throw std::runtime_error("Listen value is too big or too small\n");
@@ -39,13 +40,14 @@ static void ps_is_empty(const std::string value)
 		throw std::runtime_error("Value is empty\n");
 }
 
-static void ps_check_client_size(std::string size)
+static void ps_check_client_size(std::string& size)
 {
 	int client_size = 0;
 
 	if (size.empty())
 		throw std::runtime_error("Client size value is empty\n");
 	size[size.length() - 1] = '\0';	//rimuovo il punto e virgola per mandarlo all atoi
+	std::cout << "client size: " << size << std::endl;
 	client_size = ft_atoi(size);
 	if (client_size < 1 || client_size > 1048576) //valore espresso in numero di bytes (default value di nginx)
 		throw std::runtime_error("Client size value is not valid\n");
@@ -61,10 +63,10 @@ void	ps_check_list(ConfigData& data)
 		ps_check_server(it->server_id);
 		ps_check_listen(it->listen);
 		ps_check_client_size(it->max_client_body_size);
-		ps_is_empty(it->error_page);
+		//ps_is_empty(it->error_page);
 		for (it2 = it->locationList.begin(); it2 != it->locationList.end(); it2++)
 		{
-			ps_is_empty(it2->location);
+/* 			ps_is_empty(it2->location);
 			ps_is_empty(it2->index);
 			ps_is_empty(it2->cgi_extension);
 			ps_is_empty(it2->methods);
@@ -72,7 +74,7 @@ void	ps_check_list(ConfigData& data)
 			ps_is_empty(it2->directory);
 			ps_is_empty(it2->default_file);
 			ps_is_empty(it2->execute_cgi);
-			ps_is_empty(it2->directory_listening);
+			ps_is_empty(it2->directory_listening); */
 		}
 	}
 }

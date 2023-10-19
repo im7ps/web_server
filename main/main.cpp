@@ -6,7 +6,7 @@
 /*   By: stepis <stepis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:04:51 by sgerace           #+#    #+#             */
-/*   Updated: 2023/10/19 14:43:45 by stepis           ###   ########.fr       */
+/*   Updated: 2023/10/19 17:03:03 by stepis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int main (int argc, char** argv)
 		ps_fill_vector(path, configMap);
 		ps_check_list(configMap);
 		//printConfigData(configMap);
+		
+		socket_handler(configMap);
 	}
 	catch(const std::exception& e)
 	{
