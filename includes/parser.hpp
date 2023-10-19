@@ -6,7 +6,7 @@
 /*   By: stepis <stepis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 18:30:26 by stepis            #+#    #+#             */
-/*   Updated: 2023/10/16 22:53:15 by stepis           ###   ########.fr       */
+/*   Updated: 2023/10/19 14:53:52 by stepis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 enum RequiredParams {
     SERVER,
     HOST,
-    PORT,
+    LISTEN,
     ERROR_PAGE,
     MAX_CLIENT_BODY_SIZE,
     LOCATION,
@@ -50,7 +50,7 @@ struct LocationNode {
 struct ServerNode {
 	std::string	server_id;
 	std::string server_name;
-	std::string port;
+	std::string listen;
 	std::string error_page;
 	std::string max_client_body_size;
 	std::list<LocationNode> locationList;

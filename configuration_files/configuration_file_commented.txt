@@ -1,7 +1,7 @@
 # Impostazione del server principale
 server {
     host 0.0.0.0;
-    port 80;
+    listen 80;
     server_name example.com; # Configurazione del nome del server principale
 
     # Pagina di errore predefinita
@@ -9,7 +9,7 @@ server {
     error_page 500 /errors/500.html; # Configura la pagina di errore 500
 
     # Limita la dimensione del corpo del client a 10 MB
-    max_client_body_size 10M; # Imposta il limite della dimensione del corpo del client
+    max_client_body_size max_client_body_size; # Imposta il limite della dimensione del corpo del client
 
     # Configura le route
     location / {
@@ -39,7 +39,7 @@ server {
 # Server aggiuntivo
 server {
     host 0.0.0.0;
-    port 8080;
+    listen 8080;
 
     # Pagina di errore predefinita
     error_page 404 /errors/404.html; # Configura la pagina di errore 404
@@ -60,7 +60,7 @@ server {
 # Server predefinito per qualsiasi altra richiesta
 server {
     host 0.0.0.0;
-    port 80;
+    listen 80;
 
     # Configura le route
     location / {

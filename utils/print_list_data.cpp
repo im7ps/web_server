@@ -6,7 +6,7 @@
 /*   By: stepis <stepis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 21:22:19 by stepis            #+#    #+#             */
-/*   Updated: 2023/10/16 22:42:10 by stepis           ###   ########.fr       */
+/*   Updated: 2023/10/19 14:54:35 by stepis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void printConfigData(ConfigData& data)
 	{
 		++j;
 		i = 0;
-		std::cout << "Server" << j << ": " << currentS->port << std::endl;
+		std::cout << "Server" << j << ": " << currentS->listen << std::endl;
 
 		for (currentL = currentS->locationList.begin(); currentL != currentS->locationList.end(); ++currentL)
 		{

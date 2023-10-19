@@ -6,7 +6,7 @@
 /*   By: stepis <stepis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 21:21:27 by stepis            #+#    #+#             */
-/*   Updated: 2023/10/16 22:07:12 by stepis           ###   ########.fr       */
+/*   Updated: 2023/10/19 14:54:25 by stepis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ps_init_server_node(ServerNode& serverNode)
 {
 	serverNode.serverFieldMap.insert(std::make_pair("server", &serverNode.server_id));
 	serverNode.serverFieldMap.insert(std::make_pair("server_name", &serverNode.server_name));
-	serverNode.serverFieldMap.insert(std::make_pair("port", &serverNode.port));
+	serverNode.serverFieldMap.insert(std::make_pair("listen", &serverNode.listen));
 	serverNode.serverFieldMap.insert(std::make_pair("error_page", &serverNode.error_page));
 	serverNode.serverFieldMap.insert(std::make_pair("max_client_body_size", &serverNode.max_client_body_size));
 }
