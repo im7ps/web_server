@@ -7,3 +7,6 @@ Max client body size:
 
 To-do:
     il nome di un file potrebbe contenere le parentesi graffe, aggiungere controllo che non faccia tenere in conto delle parentesi graffe dopo l escape code '\'
+    **Make a function to read read the request and respond to the client**
+Last commit:
+    Added a new function (C like) to parse the buffer given by recv() function.
