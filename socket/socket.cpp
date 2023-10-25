@@ -63,6 +63,32 @@ static void	socket_bind_to_epoll(int server_fd, int epoll_fd, epoll_event& event
 	}
 }
 
+void parseHttpRequest(const char* buffer, std::string& method, std::string& uri, std::map<std::string, std::string>& headers) {
+    std::istringstream requestStream(buffer);
+    std::string requestLine;
+    std::getline(requestStream, requestLine);
+    std::istringstream requestLineStream(requestLine);
+
+    requestLineStream >> method >> uri;
+
+    std::string headerLine;
+    while (std::getline(requestStream, headerLine) && !headerLine.empty()) {
+        size_t colonPos = headerLine.find(':');
+        if (colonPos != std::string::npos) {
+            std::string headerName = headerLine.substr(0, colonPos);
+            std::string headerValue = headerLine.substr(colonPos + 1);
+            headers[headerName] = headerValue;
+        }
+    }
+}
+
+void printHeaders(const std::map<std::string, std::string>& headers) {
+    std::map<std::string, std::string>::const_iterator it;
+    for (it = headers.begin(); it != headers.end(); ++it) {
+        std::cout << it->first << ": " << it->second << std::endl;
+    }
+}
+
 void	socket_handler(ConfigData& configMap)
 {
 	int server_fd;
@@ -84,7 +110,9 @@ void	socket_handler(ConfigData& configMap)
 		int events_num = epoll_wait(epoll_fd, events, MAX_EVENTS, -1);
 		int	i = -1;
 		int	socket;
-		
+        std::string method;
+        std::string uri;
+        std::map<std::string, std::string> headers;
 		while (++i < events_num)
 		{
 			//caso nuova connessione
@@ -104,16 +132,20 @@ void	socket_handler(ConfigData& configMap)
 			{
 				//allocazione buffer per la ricezione dei dati
 				std::cout << "body_size: " << configMap.serverList.begin()->max_client_body_size << std::endl;
-				char* buffer = new char[ft_atoi(configMap.serverList.begin()->max_client_body_size)];
-				int bytes_received;
+				char tmp_buffer[ft_atoi(configMap.serverList.begin()->max_client_body_size)];
+                //std::string buffer;
+                int bytes_received;
 
 				//ricezione dati dal client, la size viene salvata in bytes_received
-				bytes_received = recv(events[i].data.fd, buffer, sizeof(buffer), 0);
-				//se abbiamo ricevuto dei dati gestiamo la richiesta
+				bytes_received = recv(events[i].data.fd, tmp_buffer, sizeof(tmp_buffer), 0);
+                //se abbiamo ricevuto dei dati gestiamo la richiesta
 				if (bytes_received > 0)
 				{
-					//test per mandare una risposta dal server
-					std::string response = "HTTP/1.1 200 OK\r\nContent-Length: 12\r\n\r\nHello, World";
+                    parseHttpRequest(tmp_buffer, method, uri, headers);
+					std::cout << "Type: " << method << std::endl;
+                    std::cout << "URI:  " << uri << std::endl;
+                    //printHeaders(headers);
+                    std::string response = "HTTP/1.1 200 OK\r\nContent-Length: 12\r\n\r\nHello, World";
 					//invio della risposta al client
 					send(events[i].data.fd, response.c_str(), response.length(), 0);
 					close(events[i].data.fd); // Chiudi la connessione dopo la risposta
