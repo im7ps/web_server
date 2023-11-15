@@ -1,0 +1,22 @@
+- split and trim host from request (V)
+- trasformare server address in stringa (da clientistance) dopo accept (V)
+- creare matrice env per execve CGI (V)
+- creare matrice argv per execve CGI
+- creare scriptino php per testare da mettere nella matrice (V)
+
+<!-- - handle max response body size (DONE kinda (rn is based upon content lenght from the request, I should chek the body size for security)) (only for POST) -->
+<!-- - handle autoindex for directory listing -->
+<!-- - handle index -->
+- cgi only on server config (not location) based upon file extension
+<!-- - default error pages -->
+- search for files and directories do not treat everything as a file 
+- create a timeout to close the connection
+- add Date to response header
+- handle "Connection: Close" to close the connection
+- handle chunked requests
+- handle post with cgi
+- handle delete
+- host validation
+- MIME types based upon extension if I've got time
+- spawn multiple servers for each srvnode
+- handle redirections
